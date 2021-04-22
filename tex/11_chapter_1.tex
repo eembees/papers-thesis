@@ -3,7 +3,7 @@ The WaveNet paper presents a CNN-based approach to generating audio samples. \ci
 Instead of using RNNs as a recurrent architecture, the generative model only conditions on past samples, and as such does not include any hidden "state".
 
 The probability of a waveform \(\mathbf{x}\in \mathbb{R}^T\) is expressed purely as:
-\begin{equation}\label{eq_wavenet_probabilities}
+\begin{equation}\label{eq:wavenet-probabilities}
     p(\mathbf{x}) = \prod_{t=1}^T  p(x_t | x_1, ..., x_t )
 \end{equation}
 where $ p(x_t | x_1, ..., x_t ) $ is parametrized only by the \textit{weights} in the network. 
@@ -22,7 +22,7 @@ with \(\mu = 255\).
 
 \paragraph{Dilated Causal Convolutions}
 A \textit{Causal} Convolution is a fancy way of saying that audio convolutions only work forward in time, not backward.
-This is to enforce the forward dependency in \cref{eq_wavenet_probabilities}.
+This is to enforce the forward dependency in \cref{eq:wavenet-probabilities}.
 
 A \textit{Dilated} Convolution is a convolution where the convolution kernel skips over a dimension, increasing the receptive field and observing more of the surrounding environment. 
 For an image the simplest dilated convolutional is illustrated in \cref{fig:wavenet-dilated-conv}
@@ -90,3 +90,36 @@ In all other respects we can consider this a standard CNN architecture.
         \label{fig:wavenet-architecture}
     \end{small}
 \end{figure}
+
+
+\subsubsection{Extending architecture to include latent representations of speaker}
+It's possible to add a latent representation \(\mathbf{h}\), extending \cref{eq:wavenet-probabilities} to:
+
+\begin{equation}\label{eq:wavenet-probabilities-ext}
+    p(\mathbf{x}|\mathbf{h}) = \prod_{t=1}^T  p(x_t | x_1, ..., x_t, \mathbf{h} )
+\end{equation}
+
+There are two ways to represent this:
+
+\paragraph{Global Conditioning (Speaker, Accent, Noise level)}
+Here we set \(\mathbf{h}\) to a single global latent, representing a constant over the entire sequence. 
+The activation from \cref{eq:wavenet-gated-activation} then becomes
+
+\begin{equation}
+    \mathbf{z} = \tanh ( \mathbf{x} * W_{k, f} + V^T_{k, f}\mathbf{h}) \odot \sigma ( \mathbf{x} * W_{k, g} + V^T_{k, g}\mathbf{h})
+\end{equation}
+With \(V_{k, *}\) is a linear projection , and the resulting vector \(V^T_{k, f}\mathbf{h}\) is broadcast over time \(T\).
+
+
+\paragraph{Local Conditioning (Tone of voice, changing noise levels over the call}
+Here we define \(h_t\), and use a ConvNet to upsample \(h_t\) to \(\mathbf{y} = f(\mathbf{h})\), so \cref{eq:wavenet-gated-activation} becomes:
+
+\begin{equation}
+    \mathbf{z} = \tanh ( \mathbf{x} * W_{k, f} + V_{k, f}*\mathbf{y}) \odot \sigma ( \mathbf{x} * W_{k, g} + V_{k, g}*\mathbf{y})
+\end{equation}
+
+\subsection{Results}
+
+The main results here are evaluated on "subjective naturalness" by human evaluators. 
+As such, WaveNets have outperformed previos TTS methods.
+That's not really that interesting but it makes for a cool listen: \href{https://deepmind.com/blog/article/wavenet-generative-model-raw-audio}{here}

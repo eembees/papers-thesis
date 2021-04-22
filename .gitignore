@@ -280,3 +280,6 @@ TSWLatexianTemp*
 
 # VSCode settings
 .vscode 
+
+# extra waste files 
+*__latexindent*
