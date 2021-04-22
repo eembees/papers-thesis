@@ -1,0 +1,168 @@
+\documentclass{article}
+
+\usepackage[english]{babel}
+\usepackage{fancyhdr}
+
+% Write proper math 
+\usepackage{amssymb}
+
+% Reference smart
+\usepackage{cleveref}
+
+% Font modifiers
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+
+% update to modern math font
+\usepackage{cmbright}
+
+% titlesec allows us to redefine our headings
+\usepackage{titlesec}
+
+% graphicx for graphics 
+\usepackage{tikz}
+
+\usepackage{graphicx}
+\graphicspath{ {./gfx/} }
+
+
+\usepackage[
+    paper=a4paper,
+    % showframe,
+    margin=1.5in]{geometry}% http://ctan.org/pkg/geometry
+
+% !! TESTING 
+
+\usepackage{blindtext}
+
+
+
+%% FONTS SPECIFIED HERE: USE ONE OF THE TWO:
+
+% %% USE PRIMARY FONTS: 
+% \setsansfont[
+% Extension = .otf ,
+% Path=./fnt/primary/ ,
+% UprightFont=*-Regular,
+% ItalicFont=*-RegularItalic,
+% BoldFont=*-Bold,
+% BoldItalicFont=*-BoldItalic,
+% ]{MessinaSans}
+
+% \setmainfont[
+% Extension = .otf ,
+% Path=./fnt/primary/ ,
+% UprightFont=*-Regular,
+% ]{Nantes}
+
+
+%% USE SECONDARY FONTS (open source): 
+% \setsansfont[
+% Extension = .ttf ,
+% Path=./fnt/secondary/Roboto/ ,
+% UprightFont=*-Regular,
+% BoldFont=*-Bold,
+% ItalicFont=*-Italic,
+% BoldItalicFont=*-BoldItalic,
+% ]{Roboto}
+
+\setsansfont[
+Extension = .ttf ,
+Path=./fnt/secondary/Inter/ ,
+UprightFont=*-Light,
+BoldFont=*-Regular,
+]{Inter}
+
+\setmainfont[
+Extension = .otf ,
+Path=./fnt/secondary/Noto_Serif_SC/ ,
+UprightFont=*-Regular,
+BoldFont=*-Bold,
+% ItalicFont=*-Italic,
+% BoldItalicFont=*-BoldItalic,
+]{NotoSerifSC}
+
+
+
+% Roboto mono as universal 
+\setmonofont[
+Extension = .ttf ,
+Path=./fnt/ ,
+UprightFont=*-Light,
+BoldFont=*-Regular,
+]{RobotoMono}
+
+
+
+
+
+% section titles in serif
+% \titleformat{\section}{\HUGE\mdseries\rmfamily\leftalign}
+% \titleformat{\subsection}{\LARGE\mdseries\rmfamily}
+% \titleformat{\subsubsection}{\large\mdseries\rmfamily}
+% switch between bfseries and mdseries to get bold face or not
+\titleformat*{\section}{\huge\mdseries\rmfamily}
+\titleformat*{\subsection}{\Large\mdseries\rmfamily}
+\titleformat*{\subsubsection}{\large\mdseries\rmfamily}
+\titleformat*{\paragraph}{\normalsize\bfseries\rmfamily} 
+
+% Set main font to be sans serif 
+\renewcommand{\familydefault}{\sfdefault}
+
+% PAGE STYLE HEADER AND FOOTER
+\setlength{\headheight}{30pt} 
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[RE,LO]{ \includegraphics[height=30pt]{logo/Corti-Symbol-Black-CMYK.pdf}  }
+\fancyhead[LE,RO]{\leftmark}
+\cfoot{\thepage}
+% \fancyfoot[LE,RO]{\thepage}
+% \fancyfoot[LE,RO]{\thepage}
+
+
+
+% Start counting sections at 0 
+\setcounter{section}{-1}
+
+%%%%%%%%%%%%%%%%%
+% Document here %
+%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\setcounter{page}{0}
+\include{tex/00_title}
+\restoregeometry
+\pagenumbering{roman}
+
+% \newpage
+% \include{tex/01_abstract}
+   
+% \newpage
+% \tableofcontents
+
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% \include{tex/10_chapter_0}
+% \newpage
+
+\include{tex/11_chapter_1}
+
+% \newpage
+% \include{tex/12_chapter_2}
+
+% \newpage
+% \include{tex/13_chapter_3}
+
+% \newpage
+% \include{tex/14_chapter_4}
+
+% \newpage
+
+
+\bibliographystyle{abbrv}
+\bibliography{vae}
+
+\end{document}
