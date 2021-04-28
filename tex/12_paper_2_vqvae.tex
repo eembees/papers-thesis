@@ -1,4 +1,4 @@
-\section{Paper 2: Vector Quantized VAE (VQ-VAE)}
+\section{Vector Quantized VAE (VQ-VAE)}
 Title:  \textit{Neural Discrete Representation Learning} \cite{oord_neural_2018}.
 \\
 
@@ -104,6 +104,9 @@ For audio, the VQ-VAE is trained on the VCTK dataset, which has 109 different sp
 The encoder is \textbf{6 strided convolutions with stride 2 and window-size 4}, corresponding to a downsampling of 64x. 
 The latent space is a single 512-dimensional discretized space. 
 In addition to the latent space, the decoder is conditioned on a 1-hot speaker embedding. 
+
+In order to make a prior for the latent space distribution, the authors trained a WaveNet model on the latent variables and used it as a prior on the latent space. \cite{oord_wavenet_2016}
+
 
 \paragraph{Results}
 The VQ-VAE manages to learn to interchange speakers very well. To cite the paper:
