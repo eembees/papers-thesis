@@ -93,12 +93,27 @@ The commitment loss is optimized by the \textbf{encoder}.
 \subsection{Experiments and Results}
 
 \subsubsection{Images}
-Downsampling from \(128 \times 128 \times 3 \) to \( 32 \times 32 \times 1 \).
+Downsampling from \(128 \times 128 \times 3 \) to a \( 32 \times 32 \times 1 \) discretized latent space on the ImageNet ( \(128 \times 128 \times 3\) ) dataset.
 
 For images, the encoder/decoder is the PixelCNN. 
 
+
+
 \subsubsection{Audio}
+For audio, the VQ-VAE is trained on the VCTK dataset, which has 109 different speakers. 
+The encoder is \textbf{6 strided convolutions with stride 2 and window-size 4}, corresponding to a downsampling of 64x. 
+The latent space is a single 512-dimensional discretized space. 
+In addition to the latent space, the decoder is conditioned on a 1-hot speaker embedding. 
+
+\paragraph{Results}
+The VQ-VAE manages to learn to interchange speakers very well. To cite the paper:
+
+\begin{displayquote}
+    This means that the VQ-VAE has, without any form of linguistic supervision, 
+    learned a high-level abstract space that is invariant to low-level features and only encodes the content of the speech.
+\end{displayquote}
 
 
-\subsubsection{Video}
+The authors also ran an experiment where they mapped a 128-dimensional discrete latent space to 41 phonemes. 
+Using this simple mapping they found the accuracy to be \(49.3\%\), without further mappings. 
 
