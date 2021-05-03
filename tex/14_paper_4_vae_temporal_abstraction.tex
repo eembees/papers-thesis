@@ -1,4 +1,50 @@
-\section{Variational Temporal Abstraction}
-\textit{Authors}: Taesup Kim, Sungjin Ahn, Yoshua Bengio \cite{kim_variational_2019} \\
 
-This paper is among the first to introduce a hierarchical recurrent state space model with latent variables. 
+
+\section{Variational Temporal Abstraction}\label{sec:VTA}
+\paragraph{Authors}: Taesup Kim, Sungjin Ahn, Yoshua Bengio \cite{kim_variational_2019} \\
+
+
+
+\paragraph{Overview} % (fold)
+\label{par:Overview}
+This paper is among the first to combine two recurrent state space model with latent variables. 
+
+They frame the problem as a temporal imaginative structure that should be probed, and reference the HMRNN model as a good first step.
+The entire point of the paper is trying to find an "imaginative" model that can also use the latent stochastic variables to model future possibilities. 
+
+
+
+% paragraph Overview (end)
+
+\subsection{Model} % (fold)
+\label{sub:VTA-Model}
+
+Given a sequence \(X = x_{1:T} \) we can split it into subsequences \(X = (X_1, \dots , X_N) \) with lengths \(L={l_i}\) such that \(T=\sum^N_{i=1}l_i\). 
+The VTA authors split the subsequences based on $N$ and $L$ as \textit{discrete latent variables}. 
+
+Furthermore, they introduce the terms \textit{temporal abstraction} $z_i$ which generates $X_i$ and an \textit{observation abstraction} $s_t$ which generates observation $x_t$.
+As such, an observation $x_t\in X_i$ depends on both $z_i$ and $s_t$, while the transitions of each level happen at subsequence scale for $z_i$ and at each time step for $s_t$. 
+
+The joint generative model can be written as:
+
+\begin{equation}
+    p(X,S,L,Z,N) = p(N)
+    \prod_{i=1}^N
+    p(X_i,S_i|z_i, l_i)
+    p(l_i|z_i)
+    p(z_i|z_{<i})
+    \label{eq:vta-generative}
+\end{equation}
+With the subsequence joint distribution:
+\begin{equation}
+    p(X_i,S_i|z_i,l_i) = 
+    \prod^{l_i}_{j=1}
+    p(x^i_j|s^i_j)
+    p(s^i_j|s^i_{<j}, z_i)
+    \label{eq:vta-subseq-joint}
+\end{equation}
+
+The authors argue that even if it is possible to use a Markovian SSM or HMM in \cref{eq:vta-generative} and \cref{eq:vta-subseq-joint}, using a RSSM type approach solves this better. 
+This is because the RSSM includes a deterministic RNN path which can encode complex long-term dependencies within the model, which is a weakness of HMM type models. 
+
+% subsection Model (end)
