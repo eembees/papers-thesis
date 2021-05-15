@@ -283,3 +283,6 @@ TSWLatexianTemp*
 
 # extra waste files 
 *__latexindent*
+
+# Notes from Jakob
+Notes*.pdf

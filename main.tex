@@ -2,7 +2,12 @@
 
 \usepackage[english]{babel}
 \usepackage{fancyhdr}
-
+% Make tables work proper 
+% \usepackage{amstext} % for \text macro
+% \usepackage{array}   % for \newcolumntype macro
+% \newcolumntype{L}{>{$}r<{$}} % math-mode version of "l" column type
+% \newcolumntype{R}{>{$}r<{$}} % math-mode version of "r" column type
+ 
 % Write proper math 
 \usepackage{amssymb}
 
@@ -29,7 +34,6 @@
 
 % graphicx for graphics 
 \usepackage{tikz}
-
 \usepackage{graphicx}
 \graphicspath{ {./gfx/} }
 
@@ -156,28 +160,28 @@ BoldFont=*-Regular,
 
 \include{tex/10_paper_0_vae}
 
-\newpage
-\include{tex/11_paper_1_wavenet}
-
-\newpage
-\include{tex/12_paper_2_vqvae}
-
-\newpage
-\include{tex/13_paper_3_clockwork_vae}
-
-\newpage
-\include{tex/14_paper_4_vae_temporal_abstraction}
-
-\newpage
-\include{tex/15_paper_5_HMRNN}
-
-\newpage
-\include{tex/16_paper_6_CWRNN}
-
-\newpage
-\include{tex/17_paper_7_shen_2019}
+% \newpage
+% \include{tex/11_paper_1_wavenet}
 
 % \newpage
+% \include{tex/12_paper_2_vqvae}
+
+% \newpage
+% \include{tex/13_paper_3_clockwork_vae}
+
+% \newpage
+% \include{tex/14_paper_4_HMRNN}
+
+% \newpage
+% \include{tex/15_paper_5_vae_temporal_abstraction}
+
+% \newpage
+% \include{tex/16_paper_6_CWRNN}
+
+% \newpage
+% \include{tex/17_paper_7_shen_2019}
+
+% % \newpage
 
 
 \bibliographystyle{abbrv}

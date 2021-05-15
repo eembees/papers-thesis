@@ -1,2 +1,49 @@
-\section{Auto Encoding Variational Bayes (?)}
+\section{Auto Encoding Variational Bayes}
+\paragraph{Authors:} \textbf{Diederik P. Kingma, Max Welling} \cite{kingma_auto-encoding_2014}
+
+\paragraph{Main contributions} of this paper is as follows:
+\begin{enumerate}
+    \item The reparametrization trick for SDG methods
+    \item The first "vanilla" VAE
+\end{enumerate}
+
+\subsection{Method and setup}
+
+Assume a directed graphical model able to do both inference and running a pure generative process. 
+
+We define the problem as the following: 
+Given a generative model $p_\theta(x)$, we want to find the optimal parameters for $\theta$. 
+\begin{equation}
+    p(\mathbf{x}) = p_\theta(\mathbf{x}|\mathbf{z}) p_\theta(\mathbf{z})
+    \label{eq:vae-generative}
+\end{equation}
+
+
+
+\begin{table}
+    \caption{Overview of the different definitions in the VAE}
+    \label{tab:}
+    \centering
+    \begin{tabular}{l|r}
+        \hline
+        Distribution & Equation  \\
+        % \hline
+        Generative model & 
+        \(p(\mathbf{x}) = p_\theta(\mathbf{x}|\mathbf{z}) p_\theta(\mathbf{z})\)
+        \\
+        Prior over \(\mathbf{z}\) &
+        \(p_\theta(\mathbf{z})\) 
+        \\
+        Likelihood over \(\mathbf{x}\) & 
+        \( p_\theta(\mathbf{x}|\mathbf{z}) \)
+        \\
+        % \hline
+        Posterior over \(\mathbf{z}\) & 
+        \(p_\theta(\mathbf{z}|\mathbf{x})\)
+        \\ 
+        Posterior approximation over \(\mathbf{z}\) 
+        \(q_\psi(\mathbf{z}|\mathbf{x})\)
+        % \hline
+    \end{tabular}
+\end{table}
 
